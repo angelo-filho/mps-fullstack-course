@@ -8,6 +8,8 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 router.post("/", async (req, res) => {
   const { username, password } = req.body;
 
+  const hash = await bcrypt.hash(password, 10);
+
   Users.create({
     username: username,
     password: hash,
